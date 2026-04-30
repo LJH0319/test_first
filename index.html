@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="zh-CH">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哈尔滨理工大学官网练习</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<script>
+    window.onload=function(){
+        let imglist = document.querySelectorAll('.imglist a')
+        let leftBtn = document.querySelector('.leftBtn')
+        let rightBtn = document.querySelector('.rightBtn')
+        let btnlist = document.querySelectorAll('.btnlist span')
+        // 轮播图的下标
+        let index=0;
+        let time;
+        autoPlay();
+        //位置按钮
+        btnClick();
+        function autoPlay(){
+            clearInterval(time);
+            time = setInterval(() => {
+                // for(let i=0;i<imglist.length;i++){
+                //     imglist[i].classList.remove('show');
+                // }
+                index==imglist.length-1?index=0:index++;
+                public();
+                // imglist[index].classList.add('show')
+            }, 3000);
+        }
+        leftBtn.onclick=function(){
+            // 清除一下time，防止在点击按钮的时候还在自动轮播
+            clearInterval(time);
+            index==0?index=imglist.length-1:index--;
+            public();
+            // 再调用
+            autoPlay();
+        }
+        rightBtn.onclick=function(){
+            clearInterval(time);
+            index==imglist.length-1?index=0:index++;
+            public();
+            autoPlay();
+        }
+        function public(){
+              for(let i=0;i<imglist.length;i++){
+                imglist[i].classList.remove('show');
+                btnlist[i].classList.remove('che');
+                }
+                imglist[index].classList.add('show');
+                btnlist[index].classList.add('che');
+        }
+        function btnClick(){
+            for(let i=0;i<btnlist.length;i++){
+                btnlist[i].onclick=function(){
+                    clearInterval(time);
+                    index = i;
+                    public();
+                    autoPlay();
+                }
+            }
+        }
+        // 小轮播图缓慢轮播
+        const postList=document.getElementById('postList')
+        // 速度
+        postList.style.animationDuration = '30s'
+        // 自动获取下拉菜单高度
+        const menuitems = document.querySelectorAll('.wp-menu .menu-item');
+        menuitems.forEach(item =>{
+            const submenu = item.querySelector('.submenu');
+            if(submenu){
+                const subHeight = submenu.scrollHeight;
+                item.addEventListener('mouseenter',()=>{
+                    submenu.style.height = subHeight + 'px'
+                });
+                item.addEventListener('mouseleave',()=>{
+                    submenu.style.height = '0';
+                })
+            }
+        })
+    }
+</script>
+<body>
+    <!-- 头部栏 -->
+     <div class="header">
+        <div class="container">
+            <!-- 左侧logo区 -->
+        <div class="header-left clearfix">
+            <div class="sitelogo">
+                <a href="#" title="返回哈尔滨理工大学首页"><img src="./images/logo.png" alt="logo图"></a>
+            </div>
+        </div>
+        <!-- 右侧搜索区 -->
+        <div class="header-right clearfix">
+            <div class="old">
+                <ul class="clearfix">
+                    <li class="links-i1"><a href="#">旧版网站</a></li>
+                </ul>
+            </div>
+            <div class="search-box">
+                <div class="search-wp">
+                    <form>
+                        <div class="search-input">
+                            <input class="search-title" type="text" placeholder="请输入关键字">
+                        </div>
+                        <div class="search-btn">
+                            <input type="submit" class="search-submit" value>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+     </div>
+     <!-- 头部导航栏 -->
+      <div class="wp-nav">
+        <div class="inner clearfix">
+            <div class="wp-panel">
+                <div class="wp-winder">
+                    <ul class="wp-menu clearfix">
+                        <li class="menu-item i1"><a class="menu-link" href="#">首页</a></li>
+                        <li class="menu-item i2">
+                            <a class="menu-link" href="#">学校概况</a>
+                            <ul class="submenu">
+                                <li><a href="#">学院简介</a></li>
+                                <li><a href="#">现任领导</a></li>
+                                <li><a href="#">委员会</a></li>
+                                <li><a href="#">学院办公室</a></li>
+                                <li><a href="#">学生工作办公室</a></li>
+                                <li><a href="#">系、中心</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item i3">
+                            <a class="menu-link" href="#">师资队伍</a>
+                            <ul class="submenu">
+                                <li><a href="#">荣誉称号</a></li>
+                                <li><a href="#">研究生导师</a></li>
+                                <li><a href="#">教师队伍</a></li>
+                                <li><a href="#">人才引进</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item i4">
+                            <a class="menu-link" href="#">人才培养</a>
+                            <ul class="submenu">
+                                <li><a href="#">本科生培养</a></li>
+                                <li><a href="#">硕士生培养</a></li>
+                                <li><a href="#">博士生培养</a></li>
+                                <li><a href="#">现代产业学院</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item i5">
+                            <a class="menu-link" href="#">学科建设</a>
+                            <ul class="submenu">
+                                <li><a href="#">学科简介</a></li>
+                                <li><a href="#">学科方向</a></li>
+                                <li><a href="#">支撑平台</a></li>
+                                <li><a href="#">博士后流动站</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item i6">
+                            <a class="menu-link" href="#">专业建设</a>
+                            <ul class="submenu">
+                                <li><a href="#">一流本科专业</a></li>
+                                <li><a href="#">工程教育专业认证</a></li>
+                                <li><a href="#">新工科</a></li>
+                                <li><a href="#">学生指导</a></li>
+                                <li><a href="#">研究成果</a></li>
+                                <li><a href="#">省级实验教学示范中心</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item i7">
+                            <a class="menu-link" href="#">科学研究</a>
+                            <ul class="submenu">
+                                <li><a href="#">科研动态</a></li>
+                                <li><a href="#">科研成果</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item i8">
+                            <a class="menu-link" href="#">党群工作</a>
+                            <ul class="submenu">
+                                <li><a href="#">基层党组织</a></li>
+                                <li><a href="#">党建理论</a></li>
+                                <li><a href="#">党建学习</a></li>
+                                <li><a href="#">党建活动</a></li>
+                                <li><a href="#">党建风采</a></li>
+                                <li><a href="#">能力作风建设</a></li>
+                                <li><a href="#">喜迎二十大系列活动</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item i9">
+                            <a class="menu-link" href="#">学生工作</a>
+                            <ul class="submenu">
+                                <li><a href="#">团学组织</a></li>
+                                <li><a href="#">学生党建</a></li>
+                                <li><a href="#">学生活动</a></li>
+                                <li><a href="#">心理健康</a></li>
+                                <li><a href="#">青春榜样</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item i10">
+                            <a class="menu-link" href="#">招生就业</a>
+                            <ul class="submenu">
+                                <li><a href="#">本科生招生</a></li>
+                                <li><a href="#">研究生招生</a></li>
+                                <li><a href="#">就业工作</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item i11">
+                            <a class="menu-link" href="#">校友之家</a>
+                            <ul class="submenu">
+                                <li><a href="#">校友风采</a></li>
+                                <li><a href="#">校庆专栏</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+      </div>
+      <!-- 主题内容区域 -->
+       <!-- 轮播图-暂时用图片 -->
+        <div class="wp-banner">
+            <div class="imglist clearfix">
+                <a href="#" class="show"><img src="./images/banner1.png" alt=""></a>
+                <a href="#" class="show"><img src="./images/banner2.png" alt=""></a>
+                <a href="#" class="show"><img src="./images/banner3.png" alt=""></a>
+                <div class="leftBtn">&lt;</div>
+                <div class="rightBtn">&gt;</div>
+                <!-- 位置按钮 -->
+                <div class="btnlist">
+                    <span class="che"></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        <!-- 内容区1 -->
+         <div class="main1">
+            <div class="container clearfix ">
+                <div class="main1-left ">
+                    <div class="biaoti clearfix">
+                        <div class="tt">
+                            <h3 class="titi" style="cursor: pointer;"><span class="title">学院要闻</span></h3>
+                        </div>
+                        <div class="more">
+                            <a href="#">更多>></a>
+                        </div>
+                    </div>
+                    <div class="mm1">
+                        <div class="mm1-pc"><img src="./images/mm1.png" alt="小轮播图1-暂定"></div>
+                        <div class="mm1-wz">
+                            <h2 class="wz-h2">
+                                <a href="#">计算机科学与技术学院召开2026版人才培...</a>
+                            </h2>
+                        </div>
+                    </div>
+                    <div class="mm2">
+                        <ul class="new-text">
+                            <li class="new-text-i1">
+                                    <a href="#">校党委书记赵琳深入学院调研指导</a>
+                            </li>
+                            <li class="new-text-i2">
+                                    <a href="#">校长刘侠、副校长杜军深入学院开展学科建设</a>
+                                    <a class="i2-min" href="#">为深入贯彻落实学校“学科建设年”精神和相关工作部署...</a>
+                            </li>
+                            <li class="new-text-i3">
+                                <a href="#">计算机科学与技术学院召开2026版人才培养方案论...</a>
+                            </li>
+                            <li class="new-text-i4">
+                                <a href="#">计算机科学与技术学院领导深入新生晚自习巡查指...</a>
+                            </li>
+                            <li class="new-text-i5">
+                                <a href="#">压实责任 全力攻坚——计算机科学与技术学院召开2...</a>
+                            </li>
+                            <li class="new-text-i6">
+                                <a href="#">【书记领讲开学第一课·思想领航启新程】凝心铸...</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="main1-right ">
+                    <div class="biaoti2 clearfix">
+                        <div class="tt2">
+                            <h3 class="titi" style="cursor: pointer;"><span class="title">通知公告</span></h3>
+                        </div>
+                        <div class="more">
+                            <a href="#">更多>></a>
+                        </div>
+                    </div>
+                    <div class="con">
+                        <ul class="news_list clearfix">
+                            <li class="news n1">
+                                <div class="news_date">
+                                    <div class="news_year">22</div>
+                                    <div class="news_days">2026-04</div>
+                                </div>
+                                <div class="news_wz">
+                                    <div class="news_con">
+                                        <div class="news_title">
+                                            <a href="#">计算机科学与技术学院2026年“励志之星”推荐人选公示</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="news n1">
+                                <div class="news_date">
+                                    <div class="news_year">20</div>
+                                    <div class="news_days">2026-04</div>
+                                </div>
+                                <div class="news_wz">
+                                    <div class="news_con">
+                                        <div class="news_title">
+                                            <a href="#">计算机科学与技术学院2026年博士研究生招生（第二阶段）成绩公示</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="news n1">
+                                <div class="news_date">
+                                    <div class="news_year">09</div>
+                                    <div class="news_days">2026-04</div>
+                                </div>
+                                <div class="news_wz">
+                                    <div class="news_con">
+                                        <div class="news_title">
+                                            <a href="#">计算机科学与技术学院2026年硕士研究生调剂公告 （第二批次）</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="news n2"></li>
+                            <li class="news n3"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+         </div>
+         <!-- 内容区2 -->
+          <div class="main2">
+            <div class="container">
+                <div class="mod">
+                    <div class="ml">
+                        <div class="ml-box clearfix">
+                            <div class="mod-biaoti clearfix">
+                                <div class="tt2">
+                                    <h3 class="titi" style="cursor: pointer;"><span class="title">党建活动</span></h3>
+                                </div>
+                                <div class="more">
+                                    <a href="#">更多>></a>
+                                </div>
+                            </div>
+                            <div class="con tu-text">
+                                <ul class="news-list clearfix">
+                                    <li class="news i1 clearfix">
+                                        <div class="news-title">
+                                            <a href="#">铭记光辉历史 践行初心使命—计算机...</a>
+                                        </div>
+                                        <div class="news-meta">07/02</div>
+                                    </li>
+                                    <li class="news i1 clearfix">
+                                        <div class="news-title">
+                                            <a href="#">学院党委多措并举开展系列主题党日活...</a>
+                                        </div>
+                                        <div class="news-meta">07/02</div>
+                                    </li>
+                                    <li class="news i1 clearfix">
+                                        <div class="news-title">
+                                            <a href="#">计算机科学与技术学院开展师德师风教...</a>
+                                        </div>
+                                        <div class="news-meta">07/02</div>
+                                    </li>
+                                    <li class="news i1 clearfix">
+                                        <div class="news-title">
+                                            <a href="#">计算机科学与技术学院党校圆满完成20...</a>
+                                        </div>
+                                        <div class="news-meta">07/02</div>
+                                    </li>
+                                    <li class="news i1 clearfix">
+                                        <div class="news-title">
+                                            <a href="#">以党纪学习教育推动中心工作—计算机...</a>
+                                        </div>
+                                        <div class="news-meta">07/02</div>
+                                    </li>
+                                    <li class="news i1 clearfix">
+                                        <div class="news-title">
+                                            <a href="#">计算机科学与技术学院召开辅导员队伍...</a>
+                                        </div>
+                                        <div class="news-meta">07/02</div>
+                                    </li>
+                                    <li class="news i1 clearfix">
+                                        <div class="news-title">
+                                            <a href="#">计算机科学与技术学院召开辅导员队伍...</a>
+                                        </div>
+                                        <div class="news-meta">07/02</div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mc">
+                        <div class="ml-box clearfix">
+                            <div class="mod-biaoti clearfix">
+                                <div class="tt2">
+                                    <h3 class="titi" style="cursor: pointer;"><span class="title">科研动态</span></h3>
+                                </div>
+                                <div class="more">
+                                    <a href="#">更多>></a>
+                                </div>
+                            </div>
+                            <div class="con tu-text">
+                                <ul class="news-list clearfix">
+                                    <li class="news i1 clearfix">
+                                        <div class="news-title">
+                                            <a href="#">铭记光辉历史 践行初心使命—计算机...</a>
+                                        </div>
+                                        <div class="news-meta">07/02</div>
+                                    </li>
+                                    <li class="news i1 clearfix">
+                                        <div class="news-title">
+                                            <a href="#">学院党委多措并举开展系列主题党日活...</a>
+                                        </div>
+                                        <div class="news-meta">07/02</div>
+                                    </li>
+                                    <li class="news i1 clearfix">
+                                        <div class="news-title">
+                                            <a href="#">计算机科学与技术学院开展师德师风教...</a>
+                                        </div>
+                                        <div class="news-meta">07/02</div>
+                                    </li>
+                                    <li class="news i1 clearfix">
+                                        <div class="news-title">
+                                            <a href="#">计算机科学与技术学院党校圆满完成20...</a>
+                                        </div>
+                                        <div class="news-meta">07/02</div>
+                                    </li>
+                                    <li class="news i1 clearfix">
+                                        <div class="news-title">
+                                            <a href="#">以党纪学习教育推动中心工作—计算机...</a>
+                                        </div>
+                                        <div class="news-meta">07/02</div>
+                                    </li>
+                                    <li class="news i1 clearfix">
+                                        <div class="news-title">
+                                            <a href="#">计算机科学与技术学院召开辅导员队伍...</a>
+                                        </div>
+                                        <div class="news-meta">07/02</div>
+                                    </li>
+                                    <li class="news i1 clearfix">
+                                        <div class="news-title">
+                                            <a href="#">计算机科学与技术学院召开辅导员队伍...</a>
+                                        </div>
+                                        <div class="news-meta">07/02</div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mr">
+                        <div class="ml-box clearfix">
+                            <div class="mod-biaoti clearfix">
+                                <div class="tt2">
+                                    <h3 class="titi" style="cursor: pointer;"><span class="title">常用下载</span></h3>
+                                </div>
+                                <div class="more">
+                                    <a href="#">更多>></a>
+                                </div>
+                            </div>
+                            <div class="con tu-text">
+                                <ul class="news-list clearfix">
+                                    <li class="news i1 clearfix">
+                                        <div class="news-title">
+                                            <a href="#">铭记光辉历史 践行初心使命—计算机...</a>
+                                        </div>
+                                        <div class="news-meta">07/02</div>
+                                    </li>
+                                    <li class="news i1 clearfix">
+                                        <div class="news-title">
+                                            <a href="#">学院党委多措并举开展系列主题党日活...</a>
+                                        </div>
+                                        <div class="news-meta">07/02</div>
+                                    </li>
+                                    <li class="news i1 clearfix">
+                                        <div class="news-title">
+                                            <a href="#">计算机科学与技术学院开展师德师风教...</a>
+                                        </div>
+                                        <div class="news-meta">07/02</div>
+                                    </li>
+                                    <li class="news i1 clearfix">
+                                        <div class="news-title">
+                                            <a href="#">计算机科学与技术学院党校圆满完成20...</a>
+                                        </div>
+                                        <div class="news-meta">07/02</div>
+                                    </li>
+                                    <li class="news i1 clearfix">
+                                        <div class="news-title">
+                                            <a href="#">以党纪学习教育推动中心工作—计算机...</a>
+                                        </div>
+                                        <div class="news-meta">07/02</div>
+                                    </li>
+                                    <li class="news i1 clearfix">
+                                        <div class="news-title">
+                                            <a href="#">计算机科学与技术学院召开辅导员队伍...</a>
+                                        </div>
+                                        <div class="news-meta">07/02</div>
+                                    </li>
+                                    <li class="news i1 clearfix">
+                                        <div class="news-title">
+                                            <a href="#">计算机科学与技术学院召开辅导员队伍...</a>
+                                        </div>
+                                        <div class="news-meta">07/02</div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <!-- 内容3 -->
+           <div class="main3">
+            <div class="container">
+                <div class="mod clearfix">
+                    <div class="post-min">
+                        <div class="biaoti3 clearfix">
+                            <div class="tt">
+                                <h3 class="titi"><span class="title">学院要闻</span></h3>
+                            </div>
+                            <div class="more">
+                                <a href="#">更多>></a>
+                            </div>
+                        </div>
+                        <!-- 小轮播 -->
+                        <div class="scroll-wrap">
+                        <div class="pc-min clearfix" id="postList">
+                            <div class="pc1">
+                                <img src="./images/post1.png">
+                                <div class="pc1-wz">
+                                    <a href="#">做守护祖国网络天空的雄鹰————...</a>
+                                </div>
+                            </div>
+                            <div class="pc2">
+                                <img src="./images/post2.png">
+                                <div class="pc2-wz">
+                                    <a href="#">躬身耕耘爱生如子，行为师范...</a>
+                                </div>
+                            </div>
+                            <div class="pc3">
+                                <img src="./images/post3.png">
+                                <div class="pc3-wz">
+                                    <a href="#">计算机学院党员志愿者在防疫...</a>
+                                </div>
+                            </div>
+                            <div class="pc4">
+                                <img src="./images/post4.png">
+                                <div class="pc4-wz">
+                                    <a href="#">守正创新攀高峰，团结奋进开新...</a>
+                                </div>
+                            </div>
+                            <div class="pc1">
+                                <img src="./images/post1.png">
+                                <div class="pc1-wz">
+                                    <a href="#">做守护祖国网络天空的雄鹰————...</a>
+                                </div>
+                            </div>
+                            <div class="pc2">
+                                <img src="./images/post2.png">
+                                <div class="pc2-wz">
+                                    <a href="#">躬身耕耘爱生如子，行为师范...</a>
+                                </div>
+                            </div>
+                            <div class="pc3">
+                                <img src="./images/post3.png">
+                                <div class="pc3-wz">
+                                    <a href="#">计算机学院党员志愿者在防疫...</a>
+                                </div>
+                            </div>
+                            <div class="pc4">
+                                <img src="./images/post4.png">
+                                <div class="pc4-wz">
+                                    <a href="#">守正创新攀高峰，团结奋进开新...</a>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    <div class="post-2">
+                        <div class="biaoti3 clearfix">
+                            <div class="tt">
+                                <h3 class="titi" style="cursor: pointer;"><span class="title">专业介绍</span></h3>
+                            </div>
+                            <div class="more">
+                                <a href="#">更多>></a>
+                            </div>
+                        </div>
+                        <div class="tu-text">
+                            <ul class="news-list clearfix">
+                                <li class="news n1">
+                                    <div class="news-con"></div>
+                                    <div class="news-title0"><a href="#">网络空间安全</a></div>
+                                </li>
+                                <li class="news n1">
+                                     <div class="news-con"></div>
+                                    <div class="news-title0"><a href="#">计算机科学与技术</a></div>
+                                </li>
+                                <li class="news n1">
+                                     <div class="news-con"></div>
+                                    <div class="news-title0"><a href="#">网络工程</a></div>
+                                </li>
+                                <li class="news n1">
+                                     <div class="news-con"></div>
+                                    <div class="news-title0"><a href="#">软件工程</a></div>
+                                </li>
+                                <li class="news n1">
+                                     <div class="news-con"></div>
+                                    <div class="news-title0"><a href="#">集成电路设计与集成系统</a></div>
+                                </li>
+                                <li class="news n1">
+                                     <div class="news-con"></div>
+                                    <div class="news-title0"><a href="#">物联网工程</a></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                        <div class="post-3">
+                            <div class="biaoti3 clearfix">
+                                <div class="tt">
+                                    <h3 class="titi"style="cursor: pointer;"><span class="title">校内资源</span></h3>
+                                </div>
+                                <div class="more">
+                                    <a href="#">更多>></a>
+                                </div>
+                                </div>
+                            <div class="post3-text">
+                                <ul class="post3-list clearfix">
+                                    <li class="pnews n1 clearfix">
+                                        <div class="ptitle"><a href="#">校内办公</a></div>
+                                    </li>
+                                    <li class="pnews n2 clearfix">
+                                         <div class="ptitle"><a href="#">图书馆</a></div>
+                                    </li>
+                                    <li class="pnews n3 clearfix">
+                                         <div class="ptitle"><a href="#">理工邮箱</a></div>
+                                    </li>
+                                    <li class="pnews n4 clearfix">
+                                         <div class="ptitle"><a href="#">教务在线</a></div>
+                                    </li>
+                                    <li class="pnews n5 clearfix">
+                                         <div class="ptitle"><a href="#">教师主页</a></div>
+                                    </li>
+                                    <li class="pnews n6 clearfix">
+                                         <div class="ptitle"><a href="#">新闻网</a></div>
+                                    </li>
+                                    <li class="pnews n7 clearfix">
+                                         <div class="ptitle"><a href="#">ACM/ICPC</a></div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                </div>
+            </div>
+           </div>
+           </div>
+           <!-- 页脚区 -->
+            <div class="footer">
+                <div class="container">
+                    <div class="top-link clearfix">
+                        <li style="font-size: 14px;color: white;">友情链接</li>
+                        <li><a href="#">国家教育部</a></li>
+                        <li><a href="#">国家自然科学基金委</a></li>
+                        <li><a href="#">黑龙江省教育厅</a></li>
+                        <li><a href="#">黑龙江省科技厅</a></li>
+                        <li><a href="#">中国学术会议网</a></li>
+                        <li><a href="#">学习强国</a></li>
+                        <li><a href="#">国际在线</a></li>
+                        <li><a href="#">智慧树</a></li> 
+                    </div>
+                    <div class="bottom-foot">
+                        <p class="copyright">Copyright ©版权声明©2022  计算机科学与技术学院  版权所有</p>
+                        <p class="copyright">哈尔滨理工大学 哈尔滨市南岗区学府路52号</p>
+                        <div class="foot-right">
+                            <ul class="clearfix">
+                                <li class="i1">
+                                    <div class="right-con">
+                                        <a href="#" target="_blank" title="学校公众号"><img src="./images/二维码.png" alt="二维码"></a>
+                                    </div>
+                                    <span>
+                                        <a href="#" target="_blank" title="学校公众号">学校公众号</a>
+                                    </span>
+                                </li>
+                                <li class="i2">
+                                    <div class="right-con">
+                                        <a href="#" target="_blank" title="计科芳华"><img src="./images/二维码2.png" alt="二维码"></a>
+                                    </div>
+                                    <span>
+                                        <a href="#" target="_blank" title="计科芳华">计科芳华</a>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</body>
+</html>
