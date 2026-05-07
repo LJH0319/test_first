@@ -76,122 +76,122 @@
         </div>
     </div>
 
-    <script>
-        // 1. 获取元素
-        const snake = document.getElementById("snake");
-        const food = document.getElementById("food");
-        const scoreEle = document.getElementById("score");
-        const levelEle = document.getElementById("level");
+        <script>
+            // 1. 获取元素
+            const snake = document.getElementById("snake");
+            const food = document.getElementById("food");
+            const scoreEle = document.getElementById("score");
+            const levelEle = document.getElementById("level");
 
-        // 2. 初始化变量
-        let dir = "ArrowRight"; // 初始方向：向右
-        let score = 0;
-        let level = 1;
-        let timer = null;
+            // 2. 初始化变量
+            let dir = "ArrowRight"; // 初始方向：向右
+            let score = 0;
+            let level = 1;
+            let timer = null;
 
-        // 3. 生成食物（避开蛇身体）
-        function changeFood() {
-            const snakes = snake.querySelectorAll("div");
-            let x, y;
-            // 生成食物，直到不在蛇身上
-            do {
-                x = Math.floor(Math.random() * 30) * 10;
-                y = Math.floor(Math.random() * 30) * 10;
-            } while (Array.from(snakes).some(seg => seg.offsetLeft === x && seg.offsetTop === y));
-            
-            food.style.left = x + "px";
-            food.style.top = y + "px";
-        }
-        changeFood();
-
-        // 4. 方向控制
-        const keyArr = ["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"];
-        const reObj = {
-            ArrowUp: "ArrowDown",
-            ArrowDown: "ArrowUp",
-            ArrowLeft:"ArrowRight",
-            ArrowRight:"ArrowLeft"
-        };
-
-        document.addEventListener("keydown",(event)=>{
-            if(keyArr.includes(event.key)){
+            // 3. 生成食物（避开蛇身体）
+            function changeFood() {
                 const snakes = snake.querySelectorAll("div");
-                // 蛇长度<2时可任意转向，≥2时不能掉头
-                if(snakes.length < 2 || reObj[dir] !== event.key){
-                    dir = event.key;
+                let x, y;
+                // 生成食物，直到不在蛇身上
+                do {
+                    x = Math.floor(Math.random() * 30) * 10;
+                    y = Math.floor(Math.random() * 30) * 10;
+                } while (Array.from(snakes).some(seg => seg.offsetLeft === x && seg.offsetTop === y));
+                
+                food.style.left = x + "px";
+                food.style.top = y + "px";
+            }
+            changeFood();
+
+            // 4. 方向控制
+            const keyArr = ["ArrowUp","ArrowDown","ArrowLeft","ArrowRight"];
+            const reObj = {
+                ArrowUp: "ArrowDown",
+                ArrowDown: "ArrowUp",
+                ArrowLeft:"ArrowRight",
+                ArrowRight:"ArrowLeft"
+            };
+
+            document.addEventListener("keydown",(event)=>{
+                if(keyArr.includes(event.key)){
+                    const snakes = snake.querySelectorAll("div");
+                    // 蛇长度<2时可任意转向，≥2时不能掉头
+                    if(snakes.length < 2 || reObj[dir] !== event.key){
+                        dir = event.key;
+                    }
                 }
-            }
-        })
+            })
 
-        // 5. 蛇移动核心函数
-        function move(){
-            // 每次移动都重新获取蛇的身体
-            const snakes = snake.querySelectorAll("div");
-            const head = snakes[0]; // 蛇头
+            // 5. 蛇移动核心函数
+            function move(){
+                // 每次移动都重新获取蛇的身体
+                const snakes = snake.querySelectorAll("div");
+                const head = snakes[0]; // 蛇头
 
-            // 获取蛇头当前坐标
-            let x = head.offsetLeft;
-            let y = head.offsetTop;
+                // 获取蛇头当前坐标
+                let x = head.offsetLeft;
+                let y = head.offsetTop;
 
-            // 根据方向计算新坐标
-            switch(dir){
-                case "ArrowUp":
-                    y -= 10;
-                    break;
-                case "ArrowDown":
-                    y +=10;
-                    break;
-                case "ArrowLeft":
-                    x -= 10; 
-                    break;
-                case "ArrowRight":
-                    x += 10;
-                    break;
-            }
+                // 根据方向计算新坐标
+                switch(dir){
+                    case "ArrowUp":
+                        y -= 10;
+                        break;
+                    case "ArrowDown":
+                        y +=10;
+                        break;
+                    case "ArrowLeft":
+                        x -= 10; 
+                        break;
+                    case "ArrowRight":
+                        x += 10;
+                        break;
+                }
 
-            //  边界检测：撞墙游戏结束
-            if(x < 0 || x >= 300 || y < 0 || y >= 300){
-                alert("游戏结束！得分：" + score);
-                clearInterval(timer);
-                return;
-            }
-
-            //  吃到食物
-            if(x === food.offsetLeft && y === food.offsetTop){
-                changeFood();
-                // 新增身体
-                snake.insertAdjacentHTML("beforeend","<div></div>");
-                score += 10;
-                scoreEle.innerText = score;
-                // 升级提速
-                if(score % 50 === 0){
-                    level++ ;
-                    levelEle.innerText = level;
+                //  边界检测：撞墙游戏结束
+                if(x < 0 || x >= 300 || y < 0 || y >= 300){
+                    alert("游戏结束！得分：" + score);
                     clearInterval(timer);
-                    timer = setInterval(move, 300 - (level - 1)*30);
+                    return;
                 }
-            } else {
-                //没吃到食物删除尾巴
-        const tail = snakes[snakes.length - 1];
-                 tail.remove();
-             }
-             //  创建新蛇头，插到最前面
-             const newHead = document.createElement("div");
-             newHead.style.left = x + "px";
-             newHead.style.top = y + "px";
-             snake.insertAdjacentElement("afterbegin", newHead);
-             //  撞到自己检测
-             const newSnakes = snake.querySelectorAll("div");
-             for(let i = 1; i < newSnakes.length; i++){
-                 if(x === newSnakes[i].offsetLeft && y === newSnakes[i].offsetTop){
-                     alert("游戏结束！得分：" + score);
-                     clearInterval(timer);
-                     return;
-                 }
-             }
-         }
-         // 启动游戏
-         timer = setInterval(move, 300);
-     </script>
+
+                //  吃到食物
+                if(x === food.offsetLeft && y === food.offsetTop){
+                    changeFood();
+                    // 新增身体
+                    snake.insertAdjacentHTML("beforeend","<div></div>");
+                    score += 10;
+                    scoreEle.innerText = score;
+                    // 升级提速
+                    if(score % 50 === 0){
+                        level++ ;
+                        levelEle.innerText = level;
+                        clearInterval(timer);
+                        timer = setInterval(move, 300 - (level - 1)*30);
+                    }
+                } else {
+                    //没吃到食物删除尾巴
+            const tail = snakes[snakes.length - 1];
+                    tail.remove();
+                }
+                //  创建新蛇头，插到最前面
+                const newHead = document.createElement("div");
+                newHead.style.left = x + "px";
+                newHead.style.top = y + "px";
+                snake.insertAdjacentElement("afterbegin", newHead);
+                //  撞到自己检测
+                const newSnakes = snake.querySelectorAll("div");
+                for(let i = 1; i < newSnakes.length; i++){
+                    if(x === newSnakes[i].offsetLeft && y === newSnakes[i].offsetTop){
+                        alert("游戏结束！得分：" + score);
+                        clearInterval(timer);
+                        return;
+                    }
+                }
+            }
+            // 启动游戏
+            timer = setInterval(move, 300);
+        </script>
  </body>
  </html>
