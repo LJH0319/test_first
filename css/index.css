@@ -73,10 +73,10 @@ body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legen
 .search-wp .search-input
 input.search-title::-webkit-input-placeholder{
     color: #fff;
-    opacity: 0.6;
+    opacity: 0.9;
     text-align: left;
 }
-.search-wp .search-input
+/* .search-wp .search-input
 input.search-title::-moz-placeholder{
     color: #fff;
     opacity: 0.6;
@@ -87,7 +87,7 @@ input.search-title::-ms-placeholder{
     color: #fff;
     opacity: 0.6;
     text-align: left;
-}
+} */
 .search-wp .search-btn{
     position: absolute;
     top: -1px;
