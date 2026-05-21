@@ -8,6 +8,13 @@
 </head>
 <script>
     window.onload=function(){
+        // 读取Cookie
+        let cookie = document.cookie;
+        // 如果没有登录状态
+        if (!cookie.includes('loginStatus=success')) {
+            alert('请先登录！');
+            window.location.href = './auth/index.html'; // 登录页面路径
+        }
         let imglist = document.querySelectorAll('.imglist a')
         let leftBtn = document.querySelector('.leftBtn')
         let rightBtn = document.querySelector('.rightBtn')

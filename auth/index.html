@@ -12,7 +12,7 @@
 <body>
     <div class="container" id="container">
         <div class="form-container sign-up-container">
-            <form action="#">
+            <form action="#" onsubmit="register(event)" id="registerForm">
                 <h1>用户注册</h1>
                 <div class="social-container">
                     <a href="#" class="social"><i class="iconfont icon-qq"></i></a>
@@ -21,11 +21,13 @@
                     <a href="#" class="social"><i class="iconfont icon-github"></i></a>
                 </div>
                 <span>您可以选择以上几种方式注册一个您的账户!</span>
-                <input type="text" placeholder="用户名">
-                <input type="password" placeholder="密码">
-                <input type="email" placeholder="邮箱">
-                <button id="send_code">发送验证码</button>
-                <input type="email" placeholder="验证码">
+                <input type="text" id="regUsername" placeholder="用户名">
+                <input type="password" id="regPwd" placeholder="密码">
+                <input type="email" id="regEmail" placeholder="邮箱">
+                <button type="button" id="send_code">发送验证码</button>
+                <span id="codeBox" style="border:1px solid #ccc;
+                padding:5px 10px; margin-left:10px; cursor:pointer;"></span>
+                <input type="text" autocomplete="off" id="verifyInput" placeholder="请输入验证码">
                 <button>注册</button>
             </form>
         </div>
